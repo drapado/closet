@@ -12,7 +12,6 @@ export type RootStackParamList = {
 export type MainTabParamList = {
   Closet: NavigatorScreenParams<ClosetStackParamList>;
   Outfits: NavigatorScreenParams<OutfitStackParamList>;
-  TryOn: NavigatorScreenParams<TryOnStackParamList>;
   Profile: undefined;
 };
 
@@ -25,10 +24,6 @@ export type OutfitStackParamList = {
   OutfitManagement: undefined;
   OutfitCanvas: { id?: string };
   OutfitDetail: { id: string };
-};
-
-export type TryOnStackParamList = {
-  VirtualTryOn: undefined;
 };
 
 // Screen Props Types
@@ -46,11 +41,6 @@ export type ClosetStackScreenProps<T extends keyof ClosetStackParamList> = Compo
 
 export type OutfitStackScreenProps<T extends keyof OutfitStackParamList> = CompositeScreenProps<
   NativeStackScreenProps<OutfitStackParamList, T>,
-  CompositeScreenProps<BottomTabScreenProps<MainTabParamList>, NativeStackScreenProps<RootStackParamList>>
->;
-
-export type TryOnStackScreenProps<T extends keyof TryOnStackParamList> = CompositeScreenProps<
-  NativeStackScreenProps<TryOnStackParamList, T>,
   CompositeScreenProps<BottomTabScreenProps<MainTabParamList>, NativeStackScreenProps<RootStackParamList>>
 >;
 

@@ -3,13 +3,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Platform, StyleSheet } from "react-native";
-import { MaterialIcons, MaterialCommunityIcons, FontAwesome6 } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import ClothingManagementScreen from "../screens/ClothingManagementScreen";
 import ClothingDetailScreen from "../screens/ClothingDetailScreen";
 import OutfitManagementScreen from "../screens/OutfitManagementScreen";
 import OutfitCanvasScreen from "../screens/OutfitCanvasScreen";
 import OutfitDetailScreen from "../screens/OutfitDetailScreen";
-import VirtualTryOnScreen from "../screens/VirtualTryOnScreen";
 import { colors } from "../styles/colors";
 import { typography } from "../styles/globalStyles";
 import {
@@ -17,14 +16,12 @@ import {
   MainTabParamList,
   ClosetStackParamList,
   OutfitStackParamList,
-  TryOnStackParamList,
 } from "../types/navigation";
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<MainTabParamList>();
 const ClosetStack = createNativeStackNavigator<ClosetStackParamList>();
 const OutfitStack = createNativeStackNavigator<OutfitStackParamList>();
-const TryOnStack = createNativeStackNavigator<TryOnStackParamList>();
 
 const ProfileScreen = () => <></>;
 
@@ -42,12 +39,6 @@ const OutfitStackNavigator = () => (
     <OutfitStack.Screen name="OutfitCanvas" component={OutfitCanvasScreen} />
     <OutfitStack.Screen name="OutfitDetail" component={OutfitDetailScreen} />
   </OutfitStack.Navigator>
-);
-
-const TryOnStackNavigator = () => (
-  <TryOnStack.Navigator screenOptions={{ headerShown: false }}>
-    <TryOnStack.Screen name="VirtualTryOn" component={VirtualTryOnScreen} />
-  </TryOnStack.Navigator>
 );
 
 // Main Tab Navigator
@@ -74,14 +65,6 @@ const MainTabNavigator = () => (
       component={OutfitStackNavigator}
       options={{
         tabBarIcon: ({ color, size }) => <MaterialIcons name="style" size={size} color={color} />,
-      }}
-    />
-    <Tab.Screen
-      name="TryOn"
-      component={TryOnStackNavigator}
-      options={{
-        tabBarLabel: "Try-On",
-        tabBarIcon: ({ color, size }) => <FontAwesome6 name="wand-magic-sparkles" size={20} color={color} />,
       }}
     />
     <Tab.Screen

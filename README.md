@@ -14,10 +14,9 @@ AI Closet
 **AI Closet** is a mobile application that brings an AI-powered approach to closet management and styling. Whether you want to keep track of every piece in your closet, or seek an easy way to visualize outfit ideas, the AI Closet helps you:
 
 - Digitally store and manage all your clothing.  
-- Experiment with outfit combinations on a freeform canvas and save your favorite looks for future inspiration.  
-- Preview how items/outfits (even from online stores) might look on you using virtual try-on technology.
+- Experiment with outfit combinations on a freeform canvas and save your favorite looks for future inspiration.
 
-The app is built with **React Native** and **Expo**, offering a cross-platform solution for both iOS and Android. By integrating AI for tasks like automatic background removal and smart categorization, it reduces manual work and helps users stay organized and creative with their wardrobe.
+The app is built with **React Native** and **Expo**, offering a cross-platform solution for both iOS and Android. By integrating AI for automatic background removal, it reduces manual work and helps users stay organized and creative with their wardrobe.
 
 
 ---
@@ -30,7 +29,8 @@ The app is built with **React Native** and **Expo**, offering a cross-platform s
       <strong>Add &amp; Manage Clothing Items</strong><br />
       <ul>
         <li>Easily add clothing items from the camera or gallery.</li>
-        <li>AI automatically removes backgrounds and assigns attributes (e.g., category, color, season).</li>
+        <li>AI automatically removes backgrounds for clean item photos.</li>
+        <li>Manually categorize and tag items with attributes like category, color, and season.</li>
       </ul>
     </td>
     <td width="33%" align="center">
@@ -63,24 +63,6 @@ The app is built with **React Native** and **Expo**, offering a cross-platform s
   </tr>
 </table>
 
-<br />
-
-<table max-height="400px">
-  <tr>
-    <td width="60%">
-      <strong>Virtual Try-On</strong><br />
-      <ul>
-        <li>Upload a personal photo and let the AI generate an approximate look.</li>
-        <li>Keep track of previous try-on sessions to revisit or share later.</li>
-      </ul>
-    </td>
-    <td width="40%" align="center">
-      <img src="release_assets/vton.png" alt="Virtual Try-On screen" style="max-width:100%; max-height:400px;">
-    </td>
-  </tr>
-</table>
-
-
 ---
 
 ### Tech Stack
@@ -112,15 +94,10 @@ The app is built with **React Native** and **Expo**, offering a cross-platform s
    ```
 
 3. **Configure Environment:**  
-   - The AI features require require the following APIs and keys, add them to your environment variables:
-      - OpenAI API: for auto categorization and tagging
-      - fal.ai API: for background removal
-      - Kwai Kolors API: for virtual try-on
+   - The AI features require the following API key for background removal:
+      - fal.ai API: for automatic background removal
    ```shell
-   EXPO_PUBLIC_OPENAI_KEY = ""
    EXPO_PUBLIC_FAL_KEY = ""
-   EXPO_PUBLIC_KWAI_ACCESS_KEY = ""
-   EXPO_PUBLIC_KWAI_SECRET_KEY = ""
    ```
 
 4. **Run the App:**
@@ -140,12 +117,9 @@ For a containerized setup, you can use Docker to run the web version of the app:
    ```
 
 2. **Configure Environment:**  
-   Create a `.env` file with your API keys:
+   Create a `.env` file with your API key:
    ```shell
-   EXPO_PUBLIC_OPENAI_KEY=""
    EXPO_PUBLIC_FAL_KEY=""
-   EXPO_PUBLIC_KWAI_ACCESS_KEY=""
-   EXPO_PUBLIC_KWAI_SECRET_KEY=""
    ```
 
 3. **Run with Docker Compose:**
@@ -192,15 +166,15 @@ Refer to the [design_doc](/design_doc.md) for more details on the current archit
 - **User Onboarding Screens**: Introduce new users to the app and its features.
 - **Outfit Calendar**: Track daily outfits and look back at past styles.
 - **Closet Analytics**: Gather insights like items per category, color distribution, etc.
-- **Multi-item Try-On Options**: Support multi-item try-on such as full outfits or multiple items at once.
-- **Credit-Based Premium Features**: Implement a system that allows users to purchase credits for expensive AI functionalities (mainly virtual try-ons or large-scale operations).
+- **Smart Categorization**: Implement AI-powered automatic categorization of clothing items.
+- **Premium Features**: Add advanced features for power users.
 
 ---
 
 ### Productization Considerations
 
 <div>
-  <p>One key differentiator of AI Closet is the <strong>integrated virtual try-on plus wardrobe management</strong> — an all-in-one approach compared to many closet-only or try-on-only apps.</p>
+  <p>AI Closet focuses on <strong>wardrobe management with intelligent background removal</strong> — providing a clean, organized approach to digital closet management.</p>
 </div>
 
 #### Cost Estimation
@@ -208,16 +182,10 @@ Refer to the [design_doc](/design_doc.md) for more details on the current archit
 | Service                                 | Cost/Usage      |
 |-----------------------------------------|-----------------|
 | **Background Removal (Birefnet)**       | \$0.002/image   |
-| **Clothing Categorization (GPT-4o)**    | \$0.002/image   |
-| **Virtual Try-On (Kolors by Kwai)**     | \$0.1/try-on    |
 
-Assuming an average user uploads 50 images per month, the estimated monthly cost per user would be around $0.20 for simple usage (not counting try-ons). However, for users who want to use the virtual try-on feature more frequently, a credit-based system can be implemented. 
+Assuming an average user uploads 50 images per month, the estimated monthly cost per user would be around $0.10 for background removal processing. This makes the app very cost-effective to operate.
 
-Example: 50 credits for \$10; each try-on = 1 credit.
-
-This system would provide a revenue stream while keeping the app free for most users.
-
-The backend AWS cost is minimal, but are crucial for implementing secure credit-based or pay-as-you-go models in the future. This is included for reference:
+The backend AWS cost is minimal, but are crucial for implementing secure pay-as-you-go models in the future. This is included for reference:
 
 **Backend AWS Costs** (for future cloud integrations):  
 - **API Gateway**: \$3.50 for first 333M requests  

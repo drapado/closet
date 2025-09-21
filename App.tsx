@@ -8,7 +8,6 @@ import {
 } from "@expo-google-fonts/plus-jakarta-sans";
 import AppNavigator from "./src/navigation";
 import { ClothingProvider } from "./src/contexts/ClothingContext";
-import { VirtualTryOnProvider } from "./src/contexts/VirtualTryOnContext";
 import { OutfitProvider } from "./src/contexts/OutfitContext";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
@@ -29,9 +28,7 @@ export default function App() {
     <GestureHandlerRootView style={styles.container}>
       <ClothingProvider>
         <OutfitProvider>
-          <VirtualTryOnProvider>
-            <AppNavigator />
-          </VirtualTryOnProvider>
+          <AppNavigator />
         </OutfitProvider>
       </ClothingProvider>
     </GestureHandlerRootView>
