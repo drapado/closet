@@ -98,6 +98,8 @@ The app is built with **React Native** and **Expo**, offering a cross-platform s
 
 ### Installation and Usage
 
+#### Option 1: Standard Installation
+
 1. **Clone the Repository:**
    ```shell
    git clone [Your Repo URL Here]
@@ -127,7 +129,39 @@ The app is built with **React Native** and **Expo**, offering a cross-platform s
    # Use the Expo CLI to run on an emulator, simulator, or physical device
    ```
 
-The app should now be running on your local machine. You can access it via the Expo client on your mobile device or an emulator.
+#### Option 2: Docker Installation
+
+For a containerized setup, you can use Docker to run the web version of the app:
+
+1. **Clone the Repository:**
+   ```shell
+   git clone [Your Repo URL Here]
+   cd [Your Repo Name]
+   ```
+
+2. **Configure Environment:**  
+   Create a `.env` file with your API keys:
+   ```shell
+   EXPO_PUBLIC_OPENAI_KEY=""
+   EXPO_PUBLIC_FAL_KEY=""
+   EXPO_PUBLIC_KWAI_ACCESS_KEY=""
+   EXPO_PUBLIC_KWAI_SECRET_KEY=""
+   ```
+
+3. **Run with Docker Compose:**
+   ```shell
+   docker-compose up --build
+   ```
+
+4. **Access the App:**
+   Open your browser and navigate to `http://localhost:19006`
+
+**Docker Commands:**
+- `docker-compose up --build` - Build and start the container
+- `docker-compose down` - Stop and remove the container
+- `docker-compose logs -f` - View container logs
+
+The app should now be running on your local machine. You can access it via the Expo client on your mobile device, an emulator, or through a web browser when using Docker.
 
 ---
 
